@@ -1,0 +1,16 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: {{ template "<CHARTNAME>.fullname" . }}
+  labels:
+    app: {{ template "<CHARTNAME>.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  deployer:
+    kind: helm
+    helm:
+      chartURL: {{ .Values.deployable.helm.chartURL }}
+#      valuesURL: {{ .Values.deployable.helm.valuesURL }}
+      namespace: {{ .Values.deployable.helm.namespace }}

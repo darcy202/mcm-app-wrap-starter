@@ -1,0 +1,17 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: ApplicationRelationship
+metadata:
+  name: {{ template "<CHARTNAME>.fullname" . }}
+  labels:
+    app: {{ template "<CHARTNAME>.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  destination:
+    kind: Deployable
+    name: {{ template "<CHARTNAME>.fullname" . }}
+  source:
+    kind: Application
+    name: {{ template "<CHARTNAME>.fullname" . }}
+  type: contains

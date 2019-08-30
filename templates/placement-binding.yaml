@@ -1,0 +1,17 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementBinding
+metadata:
+  name: {{ template "<CHARTNAME>.fullname" . }}
+  labels:
+    app: {{ template "<CHARTNAME>.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+placementRef:
+  apiGroup: mcm.ibm.com
+  kind: PlacementPolicy
+  name: {{ template "<CHARTNAME>.fullname" . }}
+subjects:
+- apiGroup: mcm.ibm.com
+  kind: Deployable
+  name: {{ template "<CHARTNAME>.fullname" . }}

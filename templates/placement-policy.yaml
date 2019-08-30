@@ -1,0 +1,17 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementPolicy
+metadata:
+  name: {{ template "<CHARTNAME>.fullname" . }}
+  labels:
+    app: {{ template "<CHARTNAME>.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  clusterReplicas: {{ .Values.replicaCount }}
+  clusterLabels:
+    matchLabels:
+{{ toYaml .Values.targetCluster.labelSelector.matchLabels | indent 6 }}
+  resourceHint:
+{{ toYaml .Values.targetCluster.resourceSelector | indent 4 }}
+  compliances: {{ .Values.targetCluster.compliances }}
