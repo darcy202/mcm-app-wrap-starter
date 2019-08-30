@@ -2,8 +2,10 @@
 
 ## Configure Helm client
 
-```
+
 Identify your $HELM_HOME directory (Tip: `$ helm home` if $HELM_HOME not set)
+
+```
 cd $HELM_HOME/starters
 git clone https://github.com/darcy202/mcm-app-wrap-starter.git
 ```
@@ -13,6 +15,6 @@ git clone https://github.com/darcy202/mcm-app-wrap-starter.git
 
 ```
 $ helm create mcm-liberty-server00 --starter=mcm-app-wrap-starter
-$ helm-v2.12.3 install --name=mcm-liberty-server00 --set deployable.helm.chartURL="https://github.com/IBM/charts/blob/master/repo/stable/ibm-open-liberty-1.10.0.tgz?raw=true" ./mcm-liberty-server00/ --tls
+$ helm install --name=mcm-liberty-server00 --set deployable.helm.chartURL="https://github.com/IBM/charts/blob/master/repo/stable/ibm-open-liberty-1.10.0.tgz?raw=true" ./mcm-liberty-server00/ --tls
 $ kubectl get applications.app.k8s.io
 ```
