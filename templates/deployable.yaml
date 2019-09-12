@@ -13,4 +13,5 @@ spec:
     helm:
       chartURL: {{ .Values.deployable.helm.chartURL }}
 #      valuesURL: {{ .Values.deployable.helm.valuesURL }}
+      values: {{ tpl (.Files.Get "values-workload.yaml") . | b64enc }}
       namespace: {{ .Values.deployable.helm.namespace }}

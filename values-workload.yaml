@@ -1,0 +1,6 @@
+# Override values for target Helm chart.
+# This is a YAML-formatted file.
+
+deployment:
+  labels:
+    hello: world
