@@ -13,8 +13,7 @@ targetCluster:
   compliances: ""
 
 deployable:
+  namespace: default
   helm:
-    kind: helm
     chartURL: https://github.com/IBM/charts/blob/master/repo/stable/ibm-nginx-dev-1.0.1.tgz?raw=true
     valuesURL: ""
-    namespace: default

@@ -1,0 +1,69 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: {{ template "<CHARTNAME>.fullname" . }}
+  labels:
+    app: {{ template "<CHARTNAME>.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  deployer:
+    kind: Deployment
+    kube:
+      name: nginx
+      namespace: {{ .Values.deployable.namespace }}
+      template:
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          labels:
+            run: nginx
+          name: nginx
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              run: nginx
+          strategy: {}
+          template:
+            metadata:
+              labels:
+                run: nginx
+            spec:
+              containers:
+              - image: nginx
+                name: nginx
+                resources: {}
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: {{ template "<CHARTNAME>.fullname" . }}-service
+  labels:
+    app: {{ template "<CHARTNAME>.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  deployer:
+    kind: Service
+    kube:
+      name: nginx-service
+      namespace: {{ .Values.deployable.namespace }}
+      template:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          labels:
+            app: nginx-service
+          name: nginx-service
+        spec:
+          ports:
+          - name: 5678-8080
+            port: 5678
+            protocol: TCP
+            targetPort: 8080
+          selector:
+            run: nginx
+          type: NodePort
