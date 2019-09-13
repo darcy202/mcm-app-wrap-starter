@@ -1,3 +1,5 @@
+Tested on MCM 3.2.0
+
 # Helm starters to bootstrap an MCM application
 
 This repo includes example MCM applications to quickly bootstrap a new MCM application deployment.
