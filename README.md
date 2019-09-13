@@ -37,7 +37,7 @@ Where the target deployable is a Helm chart, you can use values-workload.yaml to
 $ helm install --name=mcm-liberty-server00 --set deployable.helm.chartURL="https://github.com/IBM/charts/blob/master/repo/stable/ibm-open-liberty-1.10.0.tgz?raw=true" ./mcm-liberty-server00/ --tls
 $ kubectl get applications.app.k8s.io
 ```
-Or manage via MCM portal at https://<master>:8443/multicloud/applications
+Or manage via MCM portal at https://\<master>:8443/multicloud/applications
 
 
 
@@ -60,4 +60,4 @@ Where the target deployable is native Kubernetes yaml, you can just reference yo
 $ helm install --name=mcm-nginx-server00 ./mcm-nginx-server00/ --tls
 $ kubectl get applications.app.k8s.io
 ```
-Or manage via MCM portal at https://<master>:8443/multicloud/applications
+Or manage via MCM portal at https://\<master>:8443/multicloud/applications
